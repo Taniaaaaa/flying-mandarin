@@ -26,12 +26,12 @@ return S ;
 */
 
 //double *z0;
-const int nSize = 30;
-double Arr[nSize];
+//const int nSize = 30;
+//double Arr[nSize];
 //double Arr[] = { 0.3781, 0.69, 1.28, 0.38, 0.63, 0.69, 1.28, 1.41, 0.97, 1.28, 0.97, 1.41, 1.57 };
 //double Arr[] = { 0.34, -1.42, -1.26, 0.34, -1.30, 1.78, 0.086, 1.28, -0.76, -1.37, -0.13, 1.36, -0.49, -1.38, 0.26, -0.68, 0.1, -0.75, 0.89, 0.63 };
 //double Arr[] = { 0.34, -1.42, -1.26, 0.34, -1.30, 1.78, 0.086, 1.28, -0.76, -1.37, -0.13, 1.36, -0.49 };
-double *pAr1 = new double[nSize];
+//double *pAr1 = new double[nSize];
 
 double Random()// ~ U([0;1])
 {
@@ -49,9 +49,10 @@ double BoxMuller(bool standart)//if standart=1, then number ~ N(0,1), else ~N(a,
 	r = Random();
 	f = Random();
         z0 = cos(2 * PI*f)*sqrt(2 * log(1 / r));
-	* pAr1 = z0;
+	//* pAr1 = z0;
 	//z1 = sin(2 * PI*f)*sqrt(2 * log(1 / r));
-	if (standart == 1) return * pAr1;
+	//if (standart == 1) return * pAr1;
+	if (standart == 1) return z0;
 	
 
 }
@@ -78,10 +79,11 @@ double* task_a(double* x, int n, double sigma)//unknown parametr is a, sigma^2 =
 
 
 
-double* conf_interval(double * pAr, int nSize)//unknown parametr is a, sigma^2 == 1
+double* conf_interval(int nSize)//unknown parametr is a, sigma^2 == 1
 {//build a trusting interval for a
 	double sig_n = 0, x_ser = 0;
 	double dispersion[2];
+	double Arr[30];
 	//const double z_hamma = 1.96;//hamma=0,05
 	//if (n == 30) 
 	const double z_hamma1 = 16.791;
@@ -89,7 +91,8 @@ double* conf_interval(double * pAr, int nSize)//unknown parametr is a, sigma^2 =
 			
 	for (int i = 0; i < nSize; i++)
 	{
-		Arr[i] = *pAr1;
+		Arr[i]=BoxMuller(1);
+		//Arr[i] = *pAr1;
 		x_ser += Arr[i];
 				
 	}
@@ -122,14 +125,16 @@ double* conf_interval(double * pAr, int nSize)//unknown parametr is a, sigma^2 =
 
 int main()
 {
-	for (int i = 0; i < nSize; i++)
+	/*for (int i = 0; i < nSize; i++)
 		cout << rand() << "  ";
 	cout << endl;
 	for (int i = 0; i < nSize; ++i)
 		cout << BoxMuller(1) << ' ';
+	*/
 		
-	cout << endl;
-        conf_interval(pAr1, nSize);
+	//cout << endl;
+        //conf_interval(pAr1, nSize);
+	conf_interval(30);
 
 
 	system("pause");
