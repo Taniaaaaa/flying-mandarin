@@ -1,4 +1,4 @@
-// conf_inter.cpp: определяет точку входа для консольного приложения.
+// conf_inter.cpp: Г®ГЇГ°ГҐГ¤ГҐГ«ГїГҐГІ ГІГ®Г·ГЄГі ГўГµГ®Г¤Г  Г¤Г«Гї ГЄГ®Г­Г±Г®Г«ГјГ­Г®ГЈГ® ГЇГ°ГЁГ«Г®Г¦ГҐГ­ГЁГї.
 //
 
 //Task 1
@@ -48,7 +48,7 @@ double BoxMuller(bool standart)//if standart=1, then number ~ N(0,1), else ~N(a,
 	double z0, z1, r, f;
 	r = Random();
 	f = Random();
-    z0 = cos(2 * PI*f)*sqrt(2 * log(1 / r));
+        z0 = cos(2 * PI*f)*sqrt(2 * log(1 / r));
 	* pAr1 = z0;
 	//z1 = sin(2 * PI*f)*sqrt(2 * log(1 / r));
 	if (standart == 1) return * pAr1;
@@ -91,12 +91,16 @@ double* conf_interval(double * pAr, int nSize)//unknown parametr is a, sigma^2 =
 	{
 		Arr[i] = *pAr1;
 		x_ser += Arr[i];
+				
+	}
+	x_ser /= nSize;
+	
+	for (int i = 0; i < nSize; i++)
+	{
 		sig_n += (Arr[i] - x_ser)*(Arr[i] - x_ser);
 		
 	}
-	x_ser /= nSize;
-	sig_n /= nSize;
-
+	
 
 	//for (int i = 0; i < nSize; i++)
 	//{
@@ -125,7 +129,7 @@ int main()
 		cout << BoxMuller(1) << ' ';
 		
 	cout << endl;
-    conf_interval(pAr1, nSize);
+        conf_interval(pAr1, nSize);
 
 
 	system("pause");
